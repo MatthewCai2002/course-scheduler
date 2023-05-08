@@ -11,7 +11,7 @@ function CoursesInput(props) {
         props.setCourses((prevState) => {
             return {
                 ...prevState,
-                [event.target.id]: event.target.value
+                [event.target.id]: event.target.value.toUpperCase().split(/(\d+)/)
             }
         })
     }
@@ -32,7 +32,7 @@ function CoursesInput(props) {
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Course Abbreviation and Number, No space</th>
+                        <th scope="col">Course Code</th>
                     </tr>
                 </thead>
                 <tbody>

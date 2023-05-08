@@ -1,30 +1,28 @@
 import Dropdown from "../Utility/Dropdown/Dropdown"
 import CoursesInput from "../CoursesInput/CoursesInput"
+import data from "../../data.json"
+
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 
 function Form() {
     const [courses, setCourses] = useState({})
-    const [dropdownData, setDropdownData] = useState({ faculty: "", program: "", year: 0 })
     const navigate = useNavigate()
 
-    const faculties = ["Science", "Applied Science", "Arts"]
-    const programs = ["Computer Science", "Biology", "Chemistry"]
-    const years = [1,2,3,4,5,6,7]
+    const faculties = data.faculties
+    const programs = data.programs
+    const years = data.years
 
     const submitHandler = (event) => {
         event.preventDefault()
-        console.log(event)
-        setDropdownData((prev) => {
-            return {
-                ...prev,
-                faculty: event.target[0].textContent,
-                program: event.target[1].textContent,
-                year: event.target[2].textContent
+        navigate('/dashboard', {
+            state: {
+                faculty: event.target[0].textContent.toLowerCase(),
+                program: event.target[1].textContent.toLowerCase(),
+                year: event.target[2].textContent,
+                courses: courses
             }
         })
-
-        navigate('/dashboard')
     }
 
     return (
@@ -35,9 +33,6 @@ function Form() {
                 <Dropdown dropdownText="Choose Your Year Level" dropdownData={years}/>
                 <CoursesInput formId="info-form" setCourses={setCourses} />
                 <button className="btn btn-primary d-block" type="submit" form="info-form">submit</button>
-                <p>
-                    Faculty: {dropdownData.faculty}, Program: {dropdownData.program}, Year: {dropdownData.year}
-                </p>
             </form>
         </div>
     )

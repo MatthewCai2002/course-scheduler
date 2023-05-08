@@ -7,14 +7,16 @@ function Dropdown(props) {
         setDropdownText(event.target.text)
     }
 
-    const dropdownItems = props.dropdownData.map((str, index) => 
-        <a key={index} className="dropdown-item" href="#" onClick={selectHandler}>
-            {str}
-        </a>
-    )
+    const dropdownItems = props.dropdownData.map((str, index) => {
+        return (
+            <a key={index} className="dropdown-item" href="#" onClick={selectHandler}>
+                {str}
+            </a>
+        )
+    })
 
     return (
-        <div className="dropdown w-75 d-flex justify-content-center mb-2">
+        <div className="dropdown w-100 d-flex justify-content-center mb-2">
             <button 
                 id="dropdown-menu-btn" 
                 data-bs-toggle="dropdown" 
